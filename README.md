@@ -1,2 +1,2 @@
-# GreatStep
+<h1>세번째 삼수 project</h1>
 위대한 시작은 첫 걸음부터
