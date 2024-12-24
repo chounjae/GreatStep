@@ -4,68 +4,46 @@ html {
 body {
   margin: 0px;
 }
-.maindashboard {
-  text-align: center;
-}
-.maindashexplanation {
-  text-align: center;
-}
 .banner {
-  background-color: black;
-  padding: 25px;
+  display: block;
+  padding: 20px;
 }
-.bannertext {
+.logo {
   display: inline-block;
-  text-align: right;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 40px;
+  margin-right: 30px;
+}
+li {
+  display: inline-block;
   font-size: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 a {
+  color: black;
   text-decoration: none;
-  margin-right: 10px;
-  margin-left: 10px;
-  color: white;
 }
-.bannertextmain {
-  font-size: 30px;
-  display: inline-block;
-  text-align: left;
-  margin-right: 900px;
-  color: white;
+.menu {
+  padding-right: 700px;
 }
-/* 툴팁 스타일 */
-.link-wrapper {
-  position: relative;
-  display: inline-block;
+.languagemode {
+  font-size: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
-
-.tooltip {
-  position: absolute;
-  top: 100%; /* 링크 아래로 배치 */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: black;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 14px;
+h1 {
   text-align: center;
-  white-space: nowrap;
-  display: none;
-  z-index: 10;
+  margin-bottom: 80px;
+}
+h2 {
+  text-align: center;
+}
+.maindashboard {
+  margin-top: 50px;
 }
 
-.tooltip span {
-  display: block;
-  margin: 5px 0;
-  cursor: pointer;
-  color: white;
-}
-
-.tooltip span:hover {
-  text-decoration: underline;
-}
-
-/* 링크에 커서 올릴 때 툴팁 표시 */
-.link-wrapper:hover .tooltip {
-  display: block;
+.footer {
+  background-color: blacK;
+  padding-top: 20px;
 }
