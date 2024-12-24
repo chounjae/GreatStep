@@ -1,0 +1,33 @@
+html {
+  margin: 0px;
+}
+body {
+  margin: 0px;
+}
+.maindashboard {
+  text-align: center;
+}
+.maindashexplanation {
+  text-align: center;
+}
+.banner {
+  background-color: black;
+  padding: 25px;
+}
+.bannertext {
+  display: inline-block;
+  text-align: right;
+  font-size: 20px;
+}
+a {
+  text-decoration: none;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: white;
+}
+.bannertextmain {
+  font-size: 30px;
+  display: inline-block;
+  text-align: left;
+  margin-right: 900px;
+}
