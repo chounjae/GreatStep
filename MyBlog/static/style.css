@@ -44,7 +44,7 @@ main {
 .faq-container {
     display: flex;
     gap: 20px;
-    background-color: #f7e8f7;
+    background-color: #ffbe98;
     padding: 20px;
     border-radius: 8px;
 }
@@ -83,4 +83,27 @@ footer {
 .center-a {
     text-align: center;
     margin: 20px 0;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.menu-item {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: #f4f4f4;
+    color: #555;
+    transform: translateY(-2px);
 }
