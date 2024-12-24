@@ -30,4 +30,42 @@ a {
   display: inline-block;
   text-align: left;
   margin-right: 900px;
+  color: white;
+}
+/* 툴팁 스타일 */
+.link-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%; /* 링크 아래로 배치 */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  display: none;
+  z-index: 10;
+}
+
+.tooltip span {
+  display: block;
+  margin: 5px 0;
+  cursor: pointer;
+  color: white;
+}
+
+.tooltip span:hover {
+  text-decoration: underline;
+}
+
+/* 링크에 커서 올릴 때 툴팁 표시 */
+.link-wrapper:hover .tooltip {
+  display: block;
 }
