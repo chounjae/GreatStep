@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+main {
+    padding: 40px;
+}
+
+.faq-container {
+    display: flex;
+    gap: 20px;
+    background-color: #f7e8f7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.faq-container > div {
+    flex: 1;
+}
+
+.faq-container h2 {
+    margin-top: 0;
+    color: #555;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    margin: 0;
+    cursor: pointer;
+}
+
+.faq-item p {
+    margin: 5px 0 0;
+    display: none;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+
+.center-a {
+    text-align: center;
+    margin: 20px 0;
+}

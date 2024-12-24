@@ -3,12 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Django Website</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>myblog</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
 <body>
-    <h1>Welcome to My Django Website!</h1>
-    <p>This is a basic setup to get started with Django.</p>
-    <script src="{% static 'js/scripts.js' %}"></script>
+    <header>
+        <div class="logo">MyBlog</div>
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">VISIT</a></li>
+                <li><a href="#">IPABF 2023</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">ARCHIVE</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="faq-container">
+            <div>
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3>When will I find out if I've been accepted to In Print Art Book Fair (IPABF) 2023?</h3>
+                    <p>Acceptance is confirmed on a rolling basis, starting Nov. 1, 2023. Notifications will be sent to the email address connected to the submission form with final notifications sent on November 14th.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What are the sizes of the booths and fees for participating?</h3>
+                    <p>Details will be provided soon. Stay tuned!</p>
+                </div>
+            </div>
+            <div>
+                <h2>שאלות נפוצות</h2>
+                <div class="faq-item">
+                    <h3>מתי אוכל האחרון יעידונו לשאלותי?</h3>
+                    <p>אישור על בסיס גליל תאריכים בקשר נובמבר ותכנים הודעות האחרונות ב-14 בנובמבר.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; GreatStep
+    </footer>
+
+    <main>
+        <div class="faq-container">
+            <div>
+                <h2 class="center-a">ai 입력창 만들 예정</h2>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item h3');
+
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const next = item.nextElementSibling;
+                next.style.display = next.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
 </body>
 </html>
