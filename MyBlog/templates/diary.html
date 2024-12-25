@@ -6,10 +6,11 @@
     <title>myblog</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="logo"><a href="">DIRAY</a></div>
+        <div class="logo">DIRAY</div>
         <nav>
             <ul class="nav-list">
                 <li><a href="{% url "index" %}" class = "memu-item">Home</a></li>
@@ -24,25 +25,13 @@
     <main>
         <div class="faq-container">
             <div>
-                <h2>--</h2>
-                <div class="faq-item">
-                    <h3>--</h3>
-                    <p>--</p>
-                </div>
-                <div class="faq-item">
-                    <h3>--</h3>
-                    <p>--</p>
-                </div>
+                <h2 class = "center-a">   
+                    <a href="{% url "memo" %}" class = "href-item"><i class = "fas fa-book"></i> 기록하기</a>                       
+                </h2>
             </div>
-            <div>
-                <h2>--</h2>
-                <div class="faq-item">
-                    <h3>--</h3>
-                    <p>--</p>
-                </div>
-            </div>
-        </div>
+        </div>      
     </main>
+    
 
     <footer>
         &copy; GreatStep
@@ -51,7 +40,22 @@
     <main>
         <div class="faq-container">
             <div>
-                <h2 class="center-a">ai 예정</h2>
+                <h2 class="center-a">저장된 메모들</h2>
+            
+            <!-- 메모가 있을 경우 -->
+            {% if memos %}
+                <ul>
+                    {% for memo in memos %}
+                        <li>
+                            <h3>{{ memo.title }}</h3>
+                            <p>{{ memo.content }}</p>
+                            <small>작성일: {{ memo.created_at }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>저장된 메모가 없습니다.</p>
+            {% endif %}
             </div>
         </div>
     </main>
