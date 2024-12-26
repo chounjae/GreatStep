@@ -116,10 +116,19 @@ footer {
     margin-top: 40px;
 }
 
+/*중앙 위치 시키는 css 두 개 */
 .center-a {
     text-align: center;
     margin: 20px 0;
 }
+
+.center-container {
+    display: flex;             /* flexbox를 사용하여 자식 요소를 정렬 */
+    justify-content: center;   /* 가로 방향 중앙 정렬 */
+    align-items: center;       /* 세로 방향 중앙 정렬 */
+    height: 100vh;             /* 부모 요소의 높이를 화면 전체로 설정 */
+}
+
 
 .nav-list {
     list-style: none;

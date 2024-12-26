@@ -40,22 +40,15 @@
     <main>
         <div class="faq-container">
             <div>
-                <h2 class="center-a">저장된 메모들</h2>
-            
-            <!-- 메모가 있을 경우 -->
-            {% if memos %}
-                <ul>
-                    {% for memo in memos %}
-                        <li>
-                            <h3>{{ memo.title }}</h3>
-                            <p>{{ memo.content }}</p>
-                            <small>작성일: {{ memo.created_at }}</small>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>저장된 메모가 없습니다.</p>
-            {% endif %}
+                <h2 class="center-container">기록들</h2>
+                {% for memo in memos %}
+                <div class="memo-item">
+                    <div class="memo-title">{{ memo.title }}</div>                  
+                    <div class="memo-time">{{ memo.created_at|date:"Y-m-d" }}</div>
+                </div>
+                {% empty %}
+                <p>아직 작성된 글이 없습니다.</p>
+                {% endfor %}
             </div>
         </div>
     </main>
