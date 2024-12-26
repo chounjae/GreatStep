@@ -1,0 +1,164 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+main {
+    padding: 40px;
+}
+
+input[type = "text"] , textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 10;
+    border-radius: 5px;
+    border: 1px solid #ccc;  
+    box-sizing: border-box; 
+}
+
+input:focus{
+    outline: none;
+}
+
+textarea {
+    resize: none;  /* 크기 조정 금지 */
+    height: 300px;
+}
+
+button {
+    padding: 10px 20px;  /* 버튼 크기 */
+    font-size: 16px;  /* 글자 크기 */
+    background-color: #EDDCC9;  /* 버튼 색 */
+    color: #5A5A5A;  /* 버튼 글자색 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ecf2ec;  /* 버튼 호버 효과 */
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.faq-container {
+    display: flex;
+    gap: 20px;
+    background-color: #ffbe98;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.faq-container > div {
+    flex: 1;
+}
+
+.faq-container h2 {
+    margin-top: 0;
+    color: #555;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    margin: 0;
+    cursor: pointer;
+}
+
+.faq-item p {
+    margin: 5px 0 0;
+    display: none;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+
+/*중앙 위치 시키는 css 두 개 */
+.center-a {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.center-container {
+    display: flex;             /* flexbox를 사용하여 자식 요소를 정렬 */
+    justify-content: center;   /* 가로 방향 중앙 정렬 */
+    align-items: center;       /* 세로 방향 중앙 정렬 */
+    height: 100vh;             /* 부모 요소의 높이를 화면 전체로 설정 */
+}
+
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.menu-item {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: #f4f4f4;
+    color: #555;
+    transform: translateY(-2px);
+}
+
+.fas {
+    color: inherit; 
+    font-size: 1.5em; 
+}
+
+.href-item{
+    color: inherit;
+    text-decoration: none;
+}

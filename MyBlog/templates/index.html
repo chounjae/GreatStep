@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myblog</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+<body>
+    <header>
+        <div class="logo">HOME</div>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="#" class = "memu-item">Home</a></li>
+                <li><a href="{% url "diary" %}" class = "memu-item">Diary</a></li>
+                <li><a href="#" class = "memu-item">About</a></li>
+                <li><a href="#" class = "memu-item">None</a></li>
+                <li><a href="#" class = "memu-item">None</a></li>
+                <li><a href="#" class = "memu-item">None</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="faq-container">
+            <div>
+                <h2>--</h2>
+                <div class="faq-item">
+                    <h3>--</h3>
+                    <p>--</p>
+                </div>
+                <div class="faq-item">
+                    <h3>--</h3>
+                    <p>--</p>
+                </div>
+            </div>
+            <div>
+                <h2>--</h2>
+                <div class="faq-item">
+                    <h3>--</h3>
+                    <p>--</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; GreatStep
+    </footer>
+
+    <main>
+        <div class="faq-container">
+            <div>
+                <h2 class="center-a">ai 예정</h2>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item h3');
+
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const next = item.nextElementSibling;
+                next.style.display = next.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>
