@@ -16,9 +16,6 @@
                 <li><a href="{% url "index" %}" class = "memu-item">Home</a></li>
                 <li><a href="{% url "diary" %}" class = "memu-item">Diary</a></li>
                 <li><a href="#" class = "memu-item">About</a></li>
-                <li><a href="#" class = "memu-item">None</a></li>
-                <li><a href="#" class = "memu-item">None</a></li>
-                <li><a href="#" class = "memu-item">None</a></li>
             </ul>
         </nav>
     </header>
@@ -41,15 +38,29 @@
         <div class="faq-container">
             <div>
                 <h2 class="center-container">기록들</h2>
-                {% for memo in memos %}
-                <div class="memo-item">
-                    <div class="memo-title">{{ memo.title }}</div>                  
-                    <div class="memo-time">{{ memo.created_at|date:"Y-m-d" }}</div>
+                {% for memo in page_obj.object_list %}
+                <div class="memo-item memo-i">
+                    <div class="memo-title">
+                        <a href="{% url 'memo_detail' memo.id %}" class = "href-item sage"> {{ memo.title }} {{ memo.created_at|date:"(Y-m-d)" }}</a>
+                    </div>                  
                 </div>
                 {% empty %}
                 <p>아직 작성된 글이 없습니다.</p>
                 {% endfor %}
             </div>
+        </div>    
+
+<!--페이지네이션-->
+        <div class="pagination">
+            <span class="step-links sage">
+                <div class="pagination">
+                    <button type="submit">
+                        <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                    </button>
+                    <button type="submit" {% if page_obj.has_previous %} onclick="location.href='?page={{ page_obj.previous_page_number }}'" {% else %} disabled {% endif %}>이전</button>
+                    <button type="submit" {% if page_obj.has_next %} onclick="location.href='?page={{ page_obj.next_page_number }}'" {% else %} disabled {% endif %}>다음</button>
+                </div>
+            </span>
         </div>
     </main>
 

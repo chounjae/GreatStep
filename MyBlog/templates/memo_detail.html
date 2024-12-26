@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ memo.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+<body>
+    <header>
+        <div class="logo">MEMO</div>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="{% url 'index' %}" class="memu-item">Home</a></li>
+                <li><a href="{% url 'diary' %}" class="memu-item">Diary</a></li>
+                <li><a href="{% url 'memo' %}" class="memu-item">Memo</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="memo-detail">
+            <h2>{{ memo.title }}</h2>
+            <p>{{ memo.content }}</p>
+            <p><strong>작성일:</strong> {{ memo.created_at|date:"Y-m-d" }}</p>
+        </div>
+    </main>
+
+    <footer>
+        &copy; GreatStep
+    </footer>
+</body>
+</html>

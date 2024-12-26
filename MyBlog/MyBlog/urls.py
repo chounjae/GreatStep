@@ -23,4 +23,7 @@ urlpatterns = [
     path('' , views.index , name='index'),
     path('diary/' , views.diary , name='diary'),
     path('memo/', views.memo, name='memo'),
+    
+    #상세 메모 페이지 url
+    path('memo/<int:id>/' , views.memo_detail , name = 'memo_detail')
 ]
