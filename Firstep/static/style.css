@@ -81,10 +81,11 @@ h2 {
 .footer a {
   color: white;
   margin: 10px;
+  text-decoration: none;
 }
-.footer a :after {
+.footer a :hover {
   color: white;
   margin: 10px;
-  text-decoration: none;
   text-decoration-color: white;
+  text-decoration: dashed;
 }
