@@ -80,10 +80,13 @@ textarea:focus {
 .faq-container {
     display: flex;
     gap: 20px;
-    background-color: #ffbe98;
+    background-color: #FFF0DC;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
+    
 }
+
+
 
 .faq-container > div {
     flex: 1;
@@ -111,7 +114,7 @@ textarea:focus {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #A8B5A2;
+    background-color: #F0BB78;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
 }
@@ -195,4 +198,12 @@ footer {
     .memo-i {
         flex: 1 1 100%; /* 아주 작은 화면에서는 각 항목이 한 줄로 나열되도록 설정 */
     }
+}
+
+.shadow-box {
+    box-shadow: -5px -5px 15px grey;
+}
+
+.pagination {
+    margin-top: 8px;
 }

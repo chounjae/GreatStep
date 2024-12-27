@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div class="logo">DIRAY</div>
+        <div class="logo"><a href ="{% url "index" %}" class = "href-item">MyBlog</a></div>
         <nav>
             <ul class="nav-list">
                 <li><a href="{% url 'index' %}" class="memu-item">Home</a></li>
@@ -19,7 +19,7 @@
         </nav>
     </header>
     <main>
-        <div class="faq-container">
+        <div class="faq-container shadow-box ">
             <div>
                 <h2 class="center-a"><i class = "fas fa-book"></i> 기록하기</h2>
                 <form method="post">

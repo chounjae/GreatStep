@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div class="logo">MEMO</div>
+        <div class="logo"><a href ="{% url "index" %}" class = "href-item">MyBlog</a></div>
         <nav>
             <ul class="nav-list">
                 <li><a href="{% url 'index' %}" class="memu-item">Home</a></li>
@@ -21,7 +21,7 @@
     <main>
         <div class="memo-detail">
             <h2>{{ memo.title }}</h2>
-            <p>{{ memo.content }}</p>
+            <p>{{ memo.content|linebreaks }}</p> <!--linebreaks는 html의 줄바꿈을 무시하는 특성을 무시하는 필터-->
             <p><strong>작성일:</strong> {{ memo.created_at|date:"Y-m-d" }}</p>
         </div>
     </main>

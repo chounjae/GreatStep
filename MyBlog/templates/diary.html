@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <div class="logo">DIRAY</div>
+        <div class="logo"><a href ="{% url "index" %}" class = "href-item">MyBlog</a></div>
         <nav>
             <ul class="nav-list">
                 <li><a href="{% url "index" %}" class = "memu-item">Home</a></li>
@@ -19,8 +19,10 @@
             </ul>
         </nav>
     </header>
+
+
     <main>
-        <div class="faq-container">
+        <div class="faq-container shadow-box">
             <div>
                 <h2 class = "center-a">   
                     <a href="{% url "memo" %}" class = "href-item"><i class = "fas fa-book"></i> 기록하기</a>                       
@@ -35,7 +37,7 @@
     </footer>
 
     <main>
-        <div class="faq-container">
+        <div class="faq-container shadow-box">
             <div>
                 <h2 class="center-container">기록들</h2>
                 {% for memo in page_obj.object_list %}
@@ -48,6 +50,8 @@
                 <p>아직 작성된 글이 없습니다.</p>
                 {% endfor %}
             </div>
+
+            
         </div>    
 
 <!--페이지네이션-->
