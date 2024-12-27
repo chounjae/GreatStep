@@ -20,59 +20,51 @@
         </nav>
     </header>
 
+    <div class="content-wrapper">
+        <main class="main-content">
+            <div class="faq-container shadow-box">
+                <div>
+                    <h2 class = "center-a">   
+                        <a href="{% url "memo" %}" class = "href-item"><i class = "fas fa-book"></i> 기록하기</a>                       
+                    </h2>
+                </div>
+            </div>      
+            <div class="faq-container shadow-box">
+                <div>
+                    <h2 class="center-container">기록들</h2>
+                    {% for memo in page_obj.object_list %}
+                    <div class="memo-item memo-i">
+                        <div class="memo-title">
+                            <a href="{% url 'memo_detail' memo.id %}" class = "href-item sage"> {{ memo.title }} {{ memo.created_at|date:"(Y-m-d)" }}</a>
+                        </div>                  
+                    </div>
+                    {% empty %}
+                    <p>아직 작성된 글이 없습니다.</p>
+                    {% endfor %}
+                </div>
+            </div>    
 
-    <main>
-        <div class="faq-container shadow-box">
-            <div>
-                <h2 class = "center-a">   
-                    <a href="{% url "memo" %}" class = "href-item"><i class = "fas fa-book"></i> 기록하기</a>                       
-                </h2>
+            <!--페이지네이션-->
+            <div class="pagination">
+                <span class="step-links sage">
+                    <div class="pagination">
+                        <button type="submit">
+                            <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                        </button>
+                        <button type="submit" {% if page_obj.has_previous %} onclick="location.href='?page={{ page_obj.previous_page_number }}'" {% else %} disabled {% endif %}>이전</button>
+                        <button type="submit" {% if page_obj.has_next %} onclick="location.href='?page={{ page_obj.next_page_number }}'" {% else %} disabled {% endif %}>다음</button>
+                    </div>
+                </span>
             </div>
-        </div>      
-    </main>
-    
+        </main>
+    </div>
 
     <footer>
         &copy; GreatStep
     </footer>
 
-    <main>
-        <div class="faq-container shadow-box">
-            <div>
-                <h2 class="center-container">기록들</h2>
-                {% for memo in page_obj.object_list %}
-                <div class="memo-item memo-i">
-                    <div class="memo-title">
-                        <a href="{% url 'memo_detail' memo.id %}" class = "href-item sage"> {{ memo.title }} {{ memo.created_at|date:"(Y-m-d)" }}</a>
-                    </div>                  
-                </div>
-                {% empty %}
-                <p>아직 작성된 글이 없습니다.</p>
-                {% endfor %}
-            </div>
-
-            
-        </div>    
-
-<!--페이지네이션-->
-        <div class="pagination">
-            <span class="step-links sage">
-                <div class="pagination">
-                    <button type="submit">
-                        <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                    </button>
-                    <button type="submit" {% if page_obj.has_previous %} onclick="location.href='?page={{ page_obj.previous_page_number }}'" {% else %} disabled {% endif %}>이전</button>
-                    <button type="submit" {% if page_obj.has_next %} onclick="location.href='?page={{ page_obj.next_page_number }}'" {% else %} disabled {% endif %}>다음</button>
-                </div>
-            </span>
-        </div>
-    </main>
-
-
-
     <script>
         const faqItems = document.querySelectorAll('.faq-item h3');
-
         faqItems.forEach(item => {
             item.addEventListener('click', () => {
                 const next = item.nextElementSibling;

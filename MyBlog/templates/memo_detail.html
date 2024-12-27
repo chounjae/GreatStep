@@ -21,7 +21,7 @@
     <main>
         <div class="memo-detail">
             <h2>{{ memo.title }}</h2>
-            <p>{{ memo.content|linebreaks }}</p> <!--linebreaks는 html의 줄바꿈을 무시하는 특성을 무시하는 필터-->
+            <pre>{{ memo.content}}</pre> <!--linebreaks는 html의 줄바꿈을 무시하는 특성을 무시하는 필터 // <pre> 태그는 텍스트의 줄바꿈과 띄어쓰기를 모두 그대로 출력-->
             <p><strong>작성일:</strong> {{ memo.created_at|date:"Y-m-d" }}</p>
         </div>
     </main>
