@@ -6,58 +6,53 @@
     <title>myblog</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="logo">MyBlog</div>
+        <div class="logo"><a href ="{% url "index" %}" class = "href-item">MyBlog</a></div>
         <nav>
             <ul class="nav-list">
-                <li><a href="#" class = "memu-item">Home</a></li>
+                <li><a href="{% url "index" %}" class = "memu-item">Home</a></li>
                 <li><a href="{% url "diary" %}" class = "memu-item">Diary</a></li>
                 <li><a href="#" class = "memu-item">About</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <div class="faq-container shadow-box">
-            <div>
-                <h2>--</h2>
-                <div class="faq-item">
-                    <h3>--</h3>
-                    <p>--</p>
+
+    <div class="content-wrapper">
+        <main class="main-content">
+            <div class="faq-container shadow-box">
+                <div>
+                    <h2 class = "center-a">   
+                        <!--링크 바꿔야 함. html 사이트 개요 소개하는 웹 페이지 만들어야 함-->
+                        <a href="{% url "memo" %}" class = "href-item">사이트 개요</a>                       
+                    </h2>
                 </div>
-                <div class="faq-item">
-                    <h3>--</h3>
-                    <p>--</p>
+            </div>      
+            <div class="faq-container shadow-box">
+                <div>
+                    <h2 class="center-container">아직 못 정함</h2>
+                    {% for memo in page_obj.object_list %}
+                    <div class="memo-item memo-i">
+                        <div class="memo-title">
+                            <a href="{% url 'memo_detail' memo.id %}" class = "href-item sage"> {{ memo.title }} {{ memo.created_at|date:"(Y-m-d)" }}</a>
+                        </div>                  
+                    </div>
+                    {% empty %}
+                    <p>아직 작성된 글이 없습니다.</p>
+                    {% endfor %}
                 </div>
-            </div>
-            <div>
-                <h2>--</h2>
-                <div class="faq-item">
-                    <h3>--</h3>
-                    <p>--</p>
-                </div>
-            </div>
-        </div>
-    </main>
+            </div>               
+        </main>
+    </div>
 
     <footer>
         &copy; GreatStep
     </footer>
 
-    <main>
-        <div class="faq-container shadow-box">
-            <div>
-                <h2 class="center-a">ai 예정</h2>
-            </div>
-        </div>
-    </main>
-
-
-
     <script>
         const faqItems = document.querySelectorAll('.faq-item h3');
-
         faqItems.forEach(item => {
             item.addEventListener('click', () => {
                 const next = item.nextElementSibling;
