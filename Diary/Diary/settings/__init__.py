@@ -1,8 +1,8 @@
 import os
 
-env = os.getenv('DJANGO_ENV', 'dev')
+env = os.getenv('DJANGO_ENV', 'host')
 
-if env == 'dev':
-    from .dev import *
+if env == 'host':
+    from .host import *
 else:
     from .base import *
