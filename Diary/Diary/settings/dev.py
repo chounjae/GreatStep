@@ -4,7 +4,9 @@ DEBUG = True  # 개발에서는 True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-
+INSTALLED_APPS += [
+    'board',
+]
 
 
 DATABASES = {

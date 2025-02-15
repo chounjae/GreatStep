@@ -1,0 +1,19 @@
+<!-- post_list.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>게시글 목록</title>
+  </head>
+  <body>
+    <h1>게시글 목록</h1>
+    <ul>
+      {% for post in posts %}
+      <li>
+        <a href="{% url 'board:post_detail' post.pk %}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'board:post_create' %}">새 게시글 작성</a>
+  </body>
+</html>
