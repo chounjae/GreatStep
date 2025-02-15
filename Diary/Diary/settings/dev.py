@@ -7,15 +7,18 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 
-# 개발용 SQLite 설정 유지
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
-        'USER': 'myuser',
-        'PASSWORD': 'mypassword',
-        'HOST': 'db',  # docker-compose의 서비스 이름
+        'NAME': 'django_db',  # 로컬 개발용 MySQL DB
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
