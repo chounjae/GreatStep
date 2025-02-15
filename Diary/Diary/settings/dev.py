@@ -7,17 +7,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 
-# 개발용 SQLite 설정 유지
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # MySQL 엔진 설정
-        'NAME': 'django_db',               # 데이터베이스 이름
-        'USER': 'root',               # MySQL 사용자명
-        'PASSWORD': '1234',       # MySQL 비밀번호
-        'HOST': 'localhost',                  # MySQL 서버 주소 (로컬 서버 사용 시 'localhost')
-        'PORT': '3306',                       # MySQL 포트 (기본값 3306)
-    }
-}
+
 
 INTERNAL_IPS = [
     "127.0.0.1",
