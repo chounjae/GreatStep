@@ -3,15 +3,15 @@
 
 import os
 from pathlib import Path
-
+from dotenv import load_dotenv
+from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-DEBUG = False  # 기본값은 False, 환경별 설정에서 변경
-SECRET_KEY = 'django-insecure-79my=g@mgo-$13vrluh2)s_o#!ve_65jx7@&m$#$)m0-00nd5c'
-
+load_dotenv()
 ALLOWED_HOSTS = []
-
+DEBUG = config("DEBUG", default=False, cast=bool)
+SECRET_KEY = config("SECRET_KEY")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,8 +53,12 @@ WSGI_APPLICATION = 'Diary.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mydb',
+        'USER': 'myuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'db',  # docker-compose의 서비스 이름
+        'PORT': '3306',
     }
 }
 
@@ -96,7 +100,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+try:
+    import pymysql
+    pymysql.install_as_MySQLdb()
+except ImportError:
+    pass
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
