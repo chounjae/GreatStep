@@ -1,0 +1,51 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth account %}
+{% block head_title %}
+    {% trans "Sign In" %}
+{% endblock head_title %}
+
+
+{% block content %}
+<div class="container">
+    <div>
+        <h1>Login</h1>
+        <p>로그인하고 시작해보세요!</p>
+    </div>
+
+    <!-- 오른쪽 로그인 폼 -->
+        <div class="login-box">       
+            {% if not SOCIALACCOUNT_ONLY %}
+
+                {% url 'account_login' as login_url %}
+                <form method="post" action="{{ login_url }}">
+                    {% csrf_token %}
+                    <div class = "form-group">
+                       <label for="id_login" >id</label>
+                       <input type="text" name="login" id="id_login" required>
+                    </div>
+
+
+                    <div class = "form-group">
+                       <label for="id_password" >password</label>
+                       <input type="password" name="password" id="id_password" required>
+                       
+                       <a href="{% url 'account_reset_password' %}" class = "forgot">{% trans "Forgot your password?" %}</a>
+                    </div>              
+
+                    <button type="submit">{% trans "로그인" %}</button>
+
+                    
+                        
+                    
+                    
+                </form>
+            {% endif %}
+        
+            {% if SOCIALACCOUNT_ENABLED %}
+                {% include "socialaccount/snippets/login.html" %}
+            {% endif %}
+
+        </div>
+</div>
+{% endblock content %}

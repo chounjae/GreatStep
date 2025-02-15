@@ -1,0 +1,56 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block head_title %}
+    {% trans "Sign Up" %}
+{% endblock head_title %}
+
+{% block content %}
+<div class="container">
+    <!-- 왼쪽 설명 영역 -->
+    <div class="left">
+        <h1>회원가입</h1>
+        <p>간단한 정보를 입력하고 서비스를 이용해보세요!</p>
+    </div>
+
+    <!-- 오른쪽 회원가입 폼 -->
+    <div class="right">
+        <div class="signup-box">
+            {% element h2 %}
+                {% trans "Sign Up" %}
+            {% endelement %}
+        
+            {% if not SOCIALACCOUNT_ONLY %}
+                <p>이미 계정이 있나요? <a href="{{ login_url }}">로그인</a>하면 됩니다 !</p>
+
+                {% url 'account_signup' as signup_url %}
+                <form method="post" action="{{ signup_url }}">
+                    {% csrf_token %}
+                  <div class = "form-group">  
+                    <label for="id_username">{% trans "Username" %}:</label>
+                    <input type="text" name="username" id="id_username" required>
+            
+                    <label for="id_email">{% trans "Email" %}:</label>
+                    <input type="email" name="email" id="id_email" required>
+            
+                    <label for="id_password1">{% trans "Password" %}:</label>
+                    <input type="password" name="password1" id="id_password1" required>
+            
+                    <label for="id_password2">{% trans "Confirm Password" %}:</label>
+                    <input type="password" name="password2" id="id_password2" required>
+
+                  </div> 
+
+                    <button type="submit">{% trans "회원가입" %}</button>
+                </form>
+            {% endif %}
+
+            <!--구글 로그인 로드-->
+            {% if SOCIALACCOUNT_ENABLED %}
+                {% include "socialaccount/snippets/login.html" %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
