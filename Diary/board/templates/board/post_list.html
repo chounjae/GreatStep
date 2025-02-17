@@ -1,19 +1,127 @@
-<!-- post_list.html -->
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <title>게시글 목록</title>
-  </head>
-  <body>
-    <h1>게시글 목록</h1>
-    <ul>
-      {% for post in posts %}
-      <li>
-        <a href="{% url 'board:post_detail' post.pk %}">{{ post.title }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-    <a href="{% url 'board:post_create' %}">새 게시글 작성</a>
-  </body>
-</html>
+{% extends "account/base_entrance.html" %}
+
+{% block head_title %}게시글 목록{% endblock head_title %}
+
+{% block content %}
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .btn-signup {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #A67B5B;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-signup:hover {
+    background-color: #7A5530;
+  }
+
+  .under-bar {
+    text-decoration: none;
+    color: #7A5530;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  .post-item {
+    background: white;
+    width: 300px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    text-align: center;
+  }
+
+  .post-item:hover {
+    background: #f9f9f9;
+  }
+
+  .pagination-container {
+    position: relative;  /* 📌 부모 요소를 기준으로 고정 */
+    height: 50px;  /* 페이지네이션의 고정 높이 설정 */
+}
+
+.pagination {
+    position: absolute;
+    bottom: 0;  /* 📌 항상 하단에 위치 */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 2px;
+    text-decoration: none;
+    color: #A67B5B;
+    border: 1px solid #A67B5B;
+    border-radius: 5px;
+}
+
+.pagination .current {
+    background-color: #A67B5B;
+    color: white;
+    border: none;
+}
+
+.pagination a:hover {
+    background-color: #7A5530;
+    color: white;
+}
+</style>
+
+<div>
+    <div>
+        <h1>게시글 목록</h1>
+        <ul>
+            {% for post in page_obj %}
+                <li class="post-item">
+                    <a href="{% url 'board:post_detail' post.pk %}" class="under-bar">{{ post.title }}</a>
+                </li>
+            {% empty %}
+                <li>아직 게시글이 없습니다.</li>
+            {% endfor %}
+        </ul>
+        
+        <a href="{% url 'board:post_create' %}" class="btn-signup">새 글</a>
+
+        <!-- 📌 페이지네이션 추가 -->
+      <div class = "pagination-container">
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">처음</a>
+                <a href="?page={{ page_obj.previous_page_number }}">이전</a>
+            {% endif %}
+
+            <span class="current">페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">다음</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">마지막</a>
+            {% endif %}
+        </div>
+      </div>  
+
+    </div>
+</div>
+{% endblock %}

@@ -1,20 +1,120 @@
-<!-- post_form.html -->
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <title>
-      {% if form.instance.pk %}게시글 수정{% else %}새 게시글 작성{% endif %}
-    </title>
-  </head>
-  <body>
-    <h1>
-      {% if form.instance.pk %}게시글 수정{% else %}새 게시글 작성{% endif %}
-    </h1>
+{% extends "account/base_entrance.html" %}
+
+{% block head_title %}게시글 작성{% endblock head_title %}
+    
+{% block content %}
+<style>
+    /* 페이지 전체를 차지하는 컨테이너 */
+    .page-box {
+        width: 100vw;  /* 전체 화면 너비 */
+        max-width: 100%;
+        padding: 20px;
+        margin: 0 auto;
+    }
+
+    /* 제목과 입력창을 꽉 차게 설정 */
+    .form-group {
+        margin-bottom: 3px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    /* 제목 입력창 */
+    .form-group input {
+        width: 100%;  /* 📌 가로 전체 차지 */
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* 본문 입력창 */
+    .form-group textarea {
+        width: 100%;  /* 📌 가로 전체 차지 */
+        height: 45vh;  /* 📌 세로도 화면을 많이 차지하도록 설정 */
+        font-size: 16px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;  /* 사용자가 크기 조절 못 하게 */
+    }
+
+    /* 버튼 */
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        background-color: #A67B5B;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+        background-color: #7A5530;
+    }
+
+    /* 목록으로 돌아가기 버튼 */
+    .back-link {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 14px;
+        color: #A67B5B;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        color: #7A5530;
+    }
+
+    .text-mid {
+      text-align:center;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 26px;
+      color: #333;
+      width: 100%; 
+    }
+
+    .text-title {
+      text-align:left;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 10px;
+      color: #333;
+      width: 100%; 
+    }
+
+</style>
+
+<div class="page-box">
+    <h1 class = "text-mid">{% if form.instance.pk %}글 수정{% else %}{% endif %}</h1>
+
     <form method="POST">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">제출</button>
+        {% csrf_token %}
+        
+        <div class="form-group" >
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+
+        <div class="form-group">
+            {{ form.content.label_tag }}
+            <textarea name="content" id="content">{{ form.content.value|default_if_none:"" }}</textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">제출</button>
     </form>
-    <a href="{% url 'board:post_list' %}">목록으로 돌아가기</a>
-  </body>
-</html>
+
+    <a href="{% url 'board:post_list' %}" class="back-link">목록으로 돌아가기</a>
+</div>
+{% endblock %}
