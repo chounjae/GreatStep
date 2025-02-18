@@ -1,18 +1,40 @@
-{% extends "account/base_entrance.html" %} {% load i18n %} {% load allauth
-account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
-{%block content %}
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth account %}
+{% block head_title %}
+    {{ post.title }}
+{% endblock head_title %}
+
+{% block content %}
 <style>
   a {
     text-decoration: none;
     color: gray;
   }
+
   /* 페이지 전체를 차지하는 컨테이너 */
-  .page-box {
-    width: 100vw; /* 전체 화면 너비 */
-    max-width: 100%;
-    padding: 20px;
+    .page-box {
+    width: 80vw; /* 가로 80% */
+    max-width: 800px; /* 최대 너비 1200px */
+    min-height: 70vh; /* 최소 높이 80% */
     margin: 0 auto;
-  }
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 1vw;
+}
+
+/* 본문 입력창 */
+  .form-group textarea {
+    width: 100%; /* 가로 전체 차지 */
+    height: 50vh; /* 화면의 50% 차지 */
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none; /* 사용자가 크기 조절 못 하게 */
+}
 
   /* 제목과 입력창을 꽉 차게 설정 */
   .form-group {
@@ -35,16 +57,7 @@ account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
     border-radius: 5px;
   }
 
-  /* 본문 입력창 */
-  .form-group textarea {
-    width: 100%; /* 📌 가로 전체 차지 */
-    height: 45vh; /* 📌 세로도 화면을 많이 차지하도록 설정 */
-    font-size: 16px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none; /* 사용자가 크기 조절 못 하게 */
-  }
+  
 
   /* 버튼 */
   .btn-submit {
@@ -94,7 +107,9 @@ account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
     width: 100%;
   }
 </style>
-<div class="container">
+
+<!-- 새로운 .page-box로 감싼 부분 -->
+<div class="page-box">
   <h1>{{ post.title }}</h1>
   작성일: {{ post.created_at }}
   <p>{{ post.content }}</p>
@@ -112,4 +127,5 @@ account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
     >
   </div>
 </div>
+
 {% endblock content %}
