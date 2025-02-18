@@ -7,12 +7,12 @@ import json
 from decouple import config
 
 
-openai.api_key = config('OPENAI_API_KEY')
+openai.api_key = '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'
 
 @csrf_exempt
 def summary(request) : 
     if request.method == 'POST':
-        data = json.loads(request.div)
+        data = json.loads(request.body)
         user_content = data.get('text' , '')
         
         prompt = f"""
@@ -22,7 +22,7 @@ def summary(request) :
         
         try:
             response = openai.ChatCompletion.create(
-                model = "gpt-4o",
+                model = "gpt-4",
                 messages = [{"role": "system", "content": "게시물 글 요약 하는 ai"},
                             {"role": "user", "content": prompt}],
                 

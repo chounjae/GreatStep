@@ -11,5 +11,6 @@ urlpatterns = [
     path('',views.index),
     path('board/',include('board.urls')),
     path('accounts/' , include('allauth.urls')),
+    path('useAPI/' , include('useAPI.urls')),
 
 ]

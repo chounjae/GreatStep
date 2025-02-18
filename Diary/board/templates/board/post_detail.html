@@ -12,8 +12,8 @@
     color: gray;
   }
 
-  /* 페이지 전체를 차지하는 컨테이너 */
-    .page-box {
+  /* 페이지 전체를 차지하는 컨테이너 , 작성 된 글 보는 박스*/
+  .page-box {
     width: 80vw; /* 가로 80% */
     max-width: 800px; /* 최대 너비 1200px */
     min-height: 70vh; /* 최소 높이 80% */
@@ -21,9 +21,26 @@
     padding: 20px;
     background-color: #f8f8f8;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     margin-left: 1vw;
+
+    white-space: pre-wrap; /* 줄 바꿈 처리 */
+    word-wrap: break-word; /* 단어가 길어지면 줄 바꿈 처리 */
+    overflow-y: auto; /* 세로로 넘칠 경우 스크롤 추가 */
+    max-height: 70vh; /* 최대 높이를 설정하여 스크롤을 사용 가능하게 함 */
 }
+ 
+    .page-box2 {
+    width: 40vw; /* 가로 80% */
+    max-width: 800px; /* 최대 너비 1200px */
+    min-height: 70vh; /* 최소 높이 80% */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-left: 1vw;
+    }
 
 /* 본문 입력창 */
   .form-group textarea {
@@ -106,26 +123,79 @@
     color: #333;
     width: 100%;
   }
+
+  .btn-xy {
+    position: fixed;
+    bottom: 20px; /* 하단에서 20px 만큼 띄우기 */
+    left: 50%; /* 가로 가운데 정렬 */
+    transform: translateX(-50%); /* 정확한 중앙 정렬을 위해 왼쪽으로 50% 이동 */
+    display: flex;
+    gap: 10px; /* 버튼 간격 */
+    z-index: 100; /* 다른 요소보다 위에 표시되도록 */
+        
+  }
 </style>
 
+
 <!-- 새로운 .page-box로 감싼 부분 -->
-<div class="page-box">
-  <h1>{{ post.title }}</h1>
-  작성일: {{ post.created_at }}
-  <p>{{ post.content }}</p>
+  <div class="page-box">
+    <h1>{{ post.title }}</h1>
+     작성일: {{ post.created_at }}
+     <hr>
+         <pre>{{ post.content }}</pre>
+  </div>
+<!--ai 기능 box-->
+  <div class ="page-box2">
+    <button id="summary-btn" class="btn-submit">요약하기</button>
+    <div>  
+      <p id="summary-result">반환 결과 : </p>
+    </div>
+
+
+  </div>
 
   <!-- 오른쪽 포스트 수정/삭제 링크 -->
-  <div class="post-box" class="under-bar">
-    <a href="{% url 'board:post_update' post.pk %}">
-      <li class="btn-submit">수정</li></a
-    >
-    <a href="{% url 'board:post_delete' post.pk %}"
-      ><li class="btn-submit">삭제</li></a
-    >
-    <a href="{% url 'board:post_list' %}" class="btn btn-secondary">
-      <li class="btn-submit">목록으로 돌아가기</li></a
-    >
+  <div class = "btn-xy">
+     <a href="{% url 'board:post_update' post.pk %}">
+     <li class="btn-submit">수정</li></a >
+ 
+     <a href="{% url 'board:post_delete' post.pk %}">
+     <li class="btn-submit">삭제</li></a>
+
+     <a href="{% url 'board:post_list' %}" class="btn btn-secondary">
+     <li class="btn-submit">목록으로 돌아가기</li></a>
   </div>
-</div>
 
 {% endblock content %}
+
+
+
+<!-- JavaScript 추가 -->
+<script>
+  document.getElementById('summary-btn').addEventListener('click', function() {
+    const content = '{{ post.content|escapejs }}';  // 백엔드에서 가져온 텍스트를 JS로 넘김
+
+    // 버튼을 클릭한 후 "처리 중..." 메시지 표시
+    document.getElementById('summary-result').innerText = "처리 중...";
+
+    fetch("{% url 'useAPI:summary' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}"  // CSRF 토큰 추가
+      },
+      body: JSON.stringify({ text: content })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        document.getElementById('summary-result').innerText = "요약: " + data.text;
+      } else {
+        document.getElementById('summary-result').innerText = "요약 실패: " + data.error;
+      }
+    })
+    .catch(error => {
+      document.getElementById('summary-result').innerText = "오류 발생: " + error;
+    });
+  });
+</script>

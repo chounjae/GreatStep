@@ -10,6 +10,7 @@ INTERNAL_IPS = [
 
 ###########################
 INSTALLED_APPS += [
+    'useAPI',
     'board',
     'Glogin',
     'django.contrib.sites',

@@ -30,6 +30,7 @@ def post_create(request):
         form = PostForm()
     return render(request, 'board/post_form.html', {'form': form})
 
+
 # 게시글 수정
 @login_required(login_url='/accounts/login/')
 def post_update(request, pk):
@@ -42,6 +43,8 @@ def post_update(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'board/post_form.html', {'form': form})
+
+
 @login_required(login_url='/accounts/login/')
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
