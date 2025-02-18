@@ -1,24 +1,115 @@
-{% extends "account/base_entrance.html" %}
-{% load i18n %}
-{% load allauth account %}
-{% block head_title %}
-    {{ post.title }}
-{% endblock head_title %}
+{% extends "account/base_entrance.html" %} {% load i18n %} {% load allauth
+account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
+{%block content %}
+<style>
+  a {
+    text-decoration: none;
+    color: gray;
+  }
+  /* 페이지 전체를 차지하는 컨테이너 */
+  .page-box {
+    width: 100vw; /* 전체 화면 너비 */
+    max-width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+  }
 
+  /* 제목과 입력창을 꽉 차게 설정 */
+  .form-group {
+    margin-bottom: 3px;
+  }
 
-{% block content %}
+  .form-group label {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  /* 제목 입력창 */
+  .form-group input {
+    width: 100%; /* 📌 가로 전체 차지 */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  /* 본문 입력창 */
+  .form-group textarea {
+    width: 100%; /* 📌 가로 전체 차지 */
+    height: 45vh; /* 📌 세로도 화면을 많이 차지하도록 설정 */
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none; /* 사용자가 크기 조절 못 하게 */
+  }
+
+  /* 버튼 */
+  .btn-submit {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 2px;
+    text-decoration: none;
+    color: #a67b5b;
+    border: 1px solid #a67b5b;
+    border-radius: 5px;
+  }
+
+  .btn-submit:hover {
+    background-color: #7a5530;
+  }
+
+  /* 목록으로 돌아가기 버튼 */
+  .back-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #a67b5b;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: #7a5530;
+  }
+
+  .text-mid {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 26px;
+    color: #333;
+    width: 100%;
+  }
+
+  .text-title {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 10px;
+    color: #333;
+    width: 100%;
+  }
+</style>
 <div class="container">
-    <div>
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.content }}</p>
-        <p>작성일: {{ post.created_at }}</p>
-    </div>
+  <h1>{{ post.title }}</h1>
+  작성일: {{ post.created_at }}
+  <p>{{ post.content }}</p>
 
-    <!-- 오른쪽 포스트 수정/삭제 링크 -->
-    <div class="post-box" class = "under-bar">
-        <a href="{% url 'board:post_update' post.pk %}"> 수정 </a>
-        <a href="{% url 'board:post_delete' post.pk %}"> 삭제 </a>
-        <a href="{% url 'board:post_list' %}" class="btn btn-secondary"> 목록으로 돌아가기 </a>
-    </div>
+  <!-- 오른쪽 포스트 수정/삭제 링크 -->
+  <div class="post-box" class="under-bar">
+    <a href="{% url 'board:post_update' post.pk %}">
+      <li class="btn-submit">수정</li></a
+    >
+    <a href="{% url 'board:post_delete' post.pk %}"
+      ><li class="btn-submit">삭제</li></a
+    >
+    <a href="{% url 'board:post_list' %}" class="btn btn-secondary">
+      <li class="btn-submit">목록으로 돌아가기</li></a
+    >
+  </div>
 </div>
 {% endblock content %}

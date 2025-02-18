@@ -1,127 +1,120 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block head_title %}JIn{% endblock head_title %}</title>
-    
+
     <!-- 전체 css 관장 -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
 
-        header {
-            background: #A67B5B ;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
+      header {
+        background: #a67b5b;
+        color: white;
+        padding: 15px;
+        text-align: center;
+      }
 
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-        }
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+      }
 
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
 
-        button {
-            padding: 6px 6px;  /* 버튼 크기 */
-            font-size: 13px;  /* 글자 크기 */
-            background-color: #A67B5B;  /* 버튼 색 */
-            color: white;  /* 버튼 글자색 */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      button {
+        padding: 6px 6px; /* 버튼 크기 */
+        font-size: 13px; /* 글자 크기 */
+        background-color: #a67b5b; /* 버튼 색 */
+        color: white; /* 버튼 글자색 */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-        button:hover {
-            background-color: #7A5530
+      button:hover {
+        background-color: #7a5530;
+      }
 
-        }
-       
-        .form-group {
-            display: flex;
-            flex-direction: column; 
-            margin-bottom: 15px;
-        }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+      }
 
-        .form-group label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #333;
-            width: 100%; 
-        }
+      .form-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #333;
+        width: 100%;
+      }
 
-        .form-group input {
-            padding: 10px;
-            font-size: 14px;
-            width: 100%; 
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
+      .form-group input {
+        padding: 10px;
+        font-size: 14px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
 
-        .forgot {
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #white;
-            width: 100%; 
-        }
+      .forgot {
+        text-decoration: none;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #white;
+        width: 100%;
+      }
 
-        
-       .logout {
-         position: absolute;
-         right: 0;
-         top: 3%;
-         transform: translateY(-50%); /* 수직 중앙 정렬 */
-         padding: 8px 16px;         
-         color: white; /* 글자 색은 흰색 */
-         border: none;
-         border-radius: 4px;
-         cursor: pointer;
-         text-decoration: none; /* 링크일 경우 밑줄 제거 */
-        }
-
-
-        
+      .logout {
+        position: absolute;
+        right: 0;
+        top: 3%;
+        transform: translateY(-50%); /* 수직 중앙 정렬 */
+        padding: 8px 16px;
+        color: white; /* 글자 색은 흰색 */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none; /* 링크일 경우 밑줄 제거 */
+      }
     </style>
 
     {% block extra_head %}{% endblock extra_head %}
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- 헤더 -->
     <header>
-        <h1>GreatStep from An-Cho</h1> <a href="{%url 'account_logout'%}" class = "logout">logout</a>
+      <h1>GreatStep from An-Cho</h1>
+      {% if user.is_authenticated %}
+      <a href="{%url 'account_logout'%}" class="logout">logout</a>
+      {%endif%}
     </header>
 
     <!-- 메인 콘텐츠 -->
-    <main>
-        {% block content %}{% endblock content %}
-    </main>
+    <main>{% block content %}{% endblock content %}</main>
 
     <!-- 푸터 -->
-    <footer>
-        <p>© 2025 first Project</p>
-    </footer>
 
     {% block extra_body %}{% endblock extra_body %}
-</body>
+  </body>
 </html>
