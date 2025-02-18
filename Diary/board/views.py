@@ -9,11 +9,6 @@ from .models import Post
 #각 페이지마다 로그인 요구 모듈
 from django.contrib.auth.decorators import login_required
 
-# 게시글 목록을 템플릿에 전달
-@login_required(login_url='/accounts/login/')
-def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'board/post_list.html', {'posts': posts})
 
 # 게시글 상세 보기
 @login_required(login_url='/accounts/login/')
@@ -45,7 +40,7 @@ def post_update(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'board/post_form.html', {'form': form})
-
+@login_required(login_url='/accounts/login/')
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     
@@ -56,8 +51,13 @@ def post_delete(request, pk):
     return render(request, 'board/post_confirm_delete.html', {'post': post})
 
 #post_list 페이지에 페이지네이션 기능 추가
+@login_required(login_url='/accounts/login/')
 def post_list(request):
-    posts = Post.objects.all().order_by('-id')  # 최신 글부터 정렬
+    if not request.user.is_authenticated:
+        return redirect('Glogin:account_logout')  # 로그인 페이지로 리디렉션
+
+    user = request.user
+    posts = Post.objects.filter(user=user).order_by('-id')  # ✅ filter() 사용
     paginator = Paginator(posts, 5)  # 📌 한 페이지에 5개씩
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
