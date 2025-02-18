@@ -22,7 +22,9 @@ def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)  # 🚨 DB에 바로 저장하지 않음
+            post.user = request.user  # ✅ 현재 로그인한 유저 추가
+            post.save()  # 저장
             return redirect('board:post_list')
     else:
         form = PostForm()
@@ -54,7 +56,7 @@ def post_delete(request, pk):
 @login_required(login_url='/accounts/login/')
 def post_list(request):
     if not request.user.is_authenticated:
-        return redirect('Glogin:account_logout')  # 로그인 페이지로 리디렉션
+        return redirect('account_logout')  # 로그인 페이지로 리디렉션
 
     user = request.user
     posts = Post.objects.filter(user=user).order_by('-id')  # ✅ filter() 사용
