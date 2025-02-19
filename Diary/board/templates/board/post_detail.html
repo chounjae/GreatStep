@@ -79,7 +79,16 @@ account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
     border: 1px solid #a67b5b;
     border-radius: 5px;
   }
-
+  .btn-submits {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 2px;
+    text-decoration: none;
+    color: white;
+    text: black;
+    border: 1px solid #a67b5b;
+    border-radius: 5px;
+  }
   .btn-submit:hover {
     background-color: #7a5530;
   }
@@ -139,7 +148,7 @@ account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
 <div class="page-box2">
   <form action="{% url 'board:summary' post.pk %}" method="POST">
     {% csrf_token %}
-    <button type="submit" class="btn-submit">요약하기</button>
+    <button type="submit" class="btn-submits">요약하기</button>
   </form>
 
   {% if result %}

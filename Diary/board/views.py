@@ -84,7 +84,7 @@ def summary(request, pk):
 
         if user_content:
             prompt = f"""
-            입력 받은 문장 한줄로 요약 왠만해선 50자이내: \n{user_content}
+            입력 받은 문장 한줄로 요약 왠만해선 50자이내 : \n{user_content}
             """
 
             try:
