@@ -22,7 +22,7 @@ def summary(request) :
         
         try:
             response = openai.ChatCompletion.create(
-                model = "gpt-4",
+                model = "gpt-4o",
                 messages = [{"role": "system", "content": "게시물 글 요약 하는 ai"},
                             {"role": "user", "content": prompt}],
                 

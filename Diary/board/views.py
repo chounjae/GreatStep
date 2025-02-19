@@ -5,10 +5,12 @@ from .forms import PostForm
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .models import Post
-
+import openai
+import json
+from django.views.decorators.csrf import csrf_exempt
 #각 페이지마다 로그인 요구 모듈
 from django.contrib.auth.decorators import login_required
-
+from django.http import JsonResponse
 
 # 게시글 상세 보기
 @login_required(login_url='/accounts/login/')
@@ -68,3 +70,32 @@ def post_list(request):
     page_obj = paginator.get_page(page_number)
     
     return render(request, 'board/post_list.html', {'page_obj': page_obj})
+
+openai.api_key = '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'
+
+@login_required(login_url='/accounts/login/')
+def summary(request, pk):
+    post = get_object_or_404(Post, pk=pk)  # 게시글 가져오기
+    result = None  # 요약 결과 저장 변수
+
+    if request.method == "GET":
+        user_content = post.content  # Post 모델의 content 필드 사용
+
+        if user_content:
+            prompt = f"""
+            입력 받은 문장 : \n{user_content}
+            """
+
+            try:
+                response = openai.ChatCompletion.create(
+                    model="gpt-4",
+                    messages=[{"role": "system", "content": "게시물 글 요약하는 AI"},
+                              {"role": "user", "content": prompt}],
+                    max_tokens=100,
+                    temperature=0.5
+                )
+                result = response['choices'][0]['message']['content'].strip()
+            except Exception as e:
+                result = f"요약 실패:"
+
+    return render(request, "board/post_detail.html", {"post": post, "result": result})
