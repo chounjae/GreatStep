@@ -8,6 +8,7 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.getenv('DJANGO_SETTINGS_MODULE', 'app.settings.base'))
 ALLOWED_HOSTS = []
 DEBUG = config("DEBUG", default=False, cast=bool)

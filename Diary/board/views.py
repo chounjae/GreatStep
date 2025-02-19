@@ -6,12 +6,14 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from .models import Post
 import openai
+from django.conf import settings
 import json
 from django.views.decorators.csrf import csrf_exempt
 #각 페이지마다 로그인 요구 모듈
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-
+from django.shortcuts import redirect
+from django.contrib import messages
 # 게시글 상세 보기
 @login_required(login_url='/accounts/login/')
 def post_detail(request, pk):
@@ -71,31 +73,33 @@ def post_list(request):
     
     return render(request, 'board/post_list.html', {'page_obj': page_obj})
 
-openai.api_key = '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'
 
 @login_required(login_url='/accounts/login/')
 def summary(request, pk):
     post = get_object_or_404(Post, pk=pk)  # 게시글 가져오기
     result = None  # 요약 결과 저장 변수
 
-    if request.method == "GET":
+    if request.method == "POST":
         user_content = post.content  # Post 모델의 content 필드 사용
 
         if user_content:
             prompt = f"""
-            입력 받은 문장 : \n{user_content}
+            입력 받은 문장 한줄로 요약 왠만해선 50자이내: \n{user_content}
             """
 
             try:
-                response = openai.ChatCompletion.create(
-                    model="gpt-4",
-                    messages=[{"role": "system", "content": "게시물 글 요약하는 AI"},
-                              {"role": "user", "content": prompt}],
+                client = openai.OpenAI(api_key=settings.OPENAI_API_KEY)  # 최신 방식으로 클라이언트 생성
+                response = client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {"role": "system", "content": "게시물 글 요약하는 AI"},
+                        {"role": "user", "content": prompt}
+                    ],
                     max_tokens=100,
                     temperature=0.5
                 )
-                result = response['choices'][0]['message']['content'].strip()
+                result = response.choices[0].message.content.strip()  # 요약 결과 저장
             except Exception as e:
-                result = f"요약 실패:"
+                result = f"요약 실패: {str(e)}"  # 에러 메시지를 result에 저장
 
-    return render(request, "board/post_detail.html", {"post": post, "result": result})
+    return render(request, "board/post_detail.html", {"post": post, "result": result})  # result를 context로 전달

@@ -1,5 +1,5 @@
 {% extends "account/base_entrance.html" %} {% load i18n %} {% load allauth
-account %} {% block head_title %} {{ post.title }} {% endblock head_title %} 
+account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
 {%block content %}
 <style>
   a {
@@ -137,12 +137,15 @@ account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
 </div>
 <!--ai 기능 box-->
 <div class="page-box2">
-  <form action={%url 'board:summary' post.pk%} method='action'>
-  <input type='submit' class="btn-submit"></input>
+  <form action="{% url 'board:summary' post.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn-submit">요약하기</button>
+  </form>
+
   {% if result %}
   <h2>요약 결과:</h2>
   <p>{{ result }}</p>
-{% endif %}
+  {% endif %}
 </div>
 
 <!-- 오른쪽 포스트 수정/삭제 링크 -->
@@ -160,26 +163,29 @@ account %} {% block head_title %} {{ post.title }} {% endblock head_title %}
   >
 </div>
 
-
 {% endblock content %}
 
 <script>
-  document.getElementById("summarize-btn").addEventListener("click", function() {
+  document
+    .getElementById("summarize-btn")
+    .addEventListener("click", function () {
       fetch("{% url 'post_summary' post.pk %}", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-              "X-CSRFToken": "{{ csrf_token }}"
-          }
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": "{{ csrf_token }}",
+        },
       })
-      .then(response => response.json())
-      .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           if (data.success) {
-              document.getElementById("summary-result").innerText = "요약: " + data.text;
+            document.getElementById("summary-result").innerText =
+              "요약: " + data.text;
           } else {
-              document.getElementById("summary-result").innerText = "요약 실패: " + data.error;
+            document.getElementById("summary-result").innerText =
+              "요약 실패: " + data.error;
           }
-      })
-      .catch(error => console.error("Error:", error));
-  });
+        })
+        .catch((error) => console.error("Error:", error));
+    });
 </script>
