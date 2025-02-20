@@ -1,0 +1,39 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "deploy" ]
+  pull_request:
+    branches: [ "deploy" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    # 깃헙 레퍼지토리의 코드 체크아웃
+    - uses: actions/checkout@v4
+    
+    # Docker 이미지 빌드
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag greatstep-image:latest
+
+    # Docker 컨테이너 실행 및 의존성 설치
+    - name: Run Docker container and install dependencies
+      run: |
+        docker run -d --name greatstep-container greatstep-image:latest
+        docker exec greatstep-container bash -c "pip install -r /app/requirements.txt"
+         
+    # Docker 컨테이너 내에서 테스트 실행
+    - name: Run tests inside Docker container
+      run: |
+        docker exec greatstep-container bash -c "python /Diary/manage.py test"
+
+    # Docker 컨테이너 중지 및 제거
+    - name: Stop and remove Docker container
+      run: |
+        docker stop greatstep-container
+        docker rm greatstep-container
