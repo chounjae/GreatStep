@@ -11,4 +11,5 @@ urlpatterns = [
     path('posts/<int:pk>/edit/', views.post_update, name='post_update'),  # 게시글 수정
     path('posts/<int:pk>/delete/', views.post_delete, name='post_delete'),  # 게시글 삭제
     path('posts/<int:pk>/summary/', views.summary, name='summary'),  # 게시글 요약
+    path('public/',views.public_list, name='public_list'),
 ]

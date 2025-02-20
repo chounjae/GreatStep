@@ -1,120 +1,168 @@
-{% extends "account/base_entrance.html" %}
-
-{% block head_title %}게시글 작성{% endblock head_title %}
-    
-{% block content %}
+{% extends "account/base_entrance.html" %} {% block head_title %}게시글
+작성{%endblock head_title %} {% block content %}
 <style>
-    /* 페이지 전체를 차지하는 컨테이너 */
-    .page-box {
-        width: 100vw;  /* 전체 화면 너비 */
-        max-width: 100%;
-        padding: 20px;
-        margin: 0 auto;
-    }
+  .page-box {
+    width: 100vw;
+    max-width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+  }
 
-    /* 제목과 입력창을 꽉 차게 설정 */
-    .form-group {
-        margin-bottom: 3px;
-    }
+  .form-group {
+    margin-bottom: 3px;
+  }
 
-    .form-group label {
-        font-weight: bold;
-        font-size: 16px;
-        margin-bottom: 5px;
-        display: block;
-    }
+  .form-group label {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+  }
 
-    /* 제목 입력창 */
-    .form-group input {
-        width: 100%;  /* 📌 가로 전체 차지 */
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 
-    /* 본문 입력창 */
-    .form-group textarea {
-        width: 100%;  /* 📌 가로 전체 차지 */
-        height: 45vh;  /* 📌 세로도 화면을 많이 차지하도록 설정 */
-        font-size: 16px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        resize: none;  /* 사용자가 크기 조절 못 하게 */
-    }
+  .form-group textarea {
+    height: 45vh;
+    resize: none;
+  }
 
-    /* 버튼 */
-    .btn-submit {
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-        background-color: #A67B5B;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+  .btn-submit {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #a67b5b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
 
-    .btn-submit:hover {
-        background-color: #7A5530;
-    }
+  .btn-submit:hover {
+    background-color: #7a5530;
+  }
 
-    /* 목록으로 돌아가기 버튼 */
-    .back-link {
-        display: block;
-        margin-top: 10px;
-        text-align: center;
-        font-size: 14px;
-        color: #A67B5B;
-        font-weight: bold;
-        text-decoration: none;
-    }
+  .back-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #a67b5b;
+    font-weight: bold;
+    text-decoration: none;
+  }
 
-    .back-link:hover {
-        color: #7A5530;
-    }
+  .back-link:hover {
+    color: #7a5530;
+  }
 
-    .text-mid {
-      text-align:center;
-      font-weight: bold;
-      margin-bottom: 5px;
-      font-size: 26px;
-      color: #333;
-      width: 100%; 
-    }
+  .text-mid {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 26px;
+    color: #333;
+    width: 100%;
+  }
 
-    .text-title {
-      text-align:left;
-      font-weight: bold;
-      margin-bottom: 5px;
-      font-size: 10px;
-      color: #333;
-      width: 100%; 
-    }
+  /* 공개 / 비공개 선택 */
+  .visibility-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0;
+  }
 
+  .visibility-group label {
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn-public {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+  }
+
+  .btn-private {
+    background-color: #f44336;
+    color: white;
+    border: none;
+  }
+
+  .btn-public:hover {
+    background-color: #388e3c;
+  }
+
+  .btn-private:hover {
+    background-color: #d32f2f;
+  }
 </style>
 
 <div class="page-box">
-    <h1 class = "text-mid">{% if form.instance.pk %}글 수정{% else %}{% endif %}</h1>
+  <h1 class="text-mid">
+    {% if form.instance.pk %}글 수정{% else %}게시글 작성{% endif %}
+  </h1>
 
-    <form method="POST">
-        {% csrf_token %}
-        
-        <div class="form-group" >
-            {{ form.title.label_tag }}
-            {{ form.title }}
-        </div>
+  <form method="POST">
+    {% csrf_token %}
 
-        <div class="form-group">
-            {{ form.content.label_tag }}
-            <textarea name="content" id="content">{{ form.content.value|default_if_none:"" }}</textarea>
-        </div>
+    <div class="form-group">{{ form.title.label_tag }} {{ form.title }}</div>
 
-        <button type="submit" class="btn-submit">제출</button>
-    </form>
+    <div class="form-group">
+      {{ form.content.label_tag }}
+      <textarea name="content" id="content">
+{{ form.content.value|default_if_none:"" }}</textarea
+      >
+    </div>
 
-    <a href="{% url 'board:post_list' %}" class="back-link">목록으로 돌아가기</a>
+    <!-- 공개 / 비공개 선택 -->
+    <div class="visibility-group">
+      <label class="btn-public">
+        <input
+          type="radio"
+          name="visibility"
+          value="True"
+          {%
+          if
+          form.instance.visibility
+          %}checked{%
+          endif
+          %}
+        />
+        공개
+      </label>
+      <label class="btn-private">
+        <input
+          type="radio"
+          name="visibility"
+          value="False"
+          {%
+          if
+          not
+          form.instance.visibility
+          %}checked{%
+          endif
+          %}
+        />
+        비공개
+      </label>
+    </div>
+
+    <button type="submit" class="btn-submit">제출</button>
+  </form>
+
+  <a href="{% url 'board:post_list' %}" class="back-link">목록으로 돌아가기</a>
 </div>
+
 {% endblock %}

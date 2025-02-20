@@ -94,7 +94,6 @@
 <div>
   <div>
     <h1>게시글 목록</h1>
-
     <ul>
       {% for post in page_obj %}
       <li class="post-item">
@@ -108,7 +107,7 @@
     </ul>
 
     <a href="{% url 'board:post_create' %}" class="btn-signup">새 글</a>
-    <a href="{% url 'board:public_list' %}" class="btn-signup">공개</a>
+    <a href="{% url 'board:post_list' %}" class="btn-signup">비공개</a>
     <!-- 📌 페이지네이션 추가 -->
     <div class="pagination-container">
       <div class="pagination">

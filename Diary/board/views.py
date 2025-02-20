@@ -28,10 +28,12 @@ def post_create(request):
         if form.is_valid():
             post = form.save(commit=False)  # 🚨 DB에 바로 저장하지 않음
             post.user = request.user  # ✅ 현재 로그인한 유저 추가
+            post.visibility = request.POST.get("visibility") == "True"  # ✅ 공개/비공개 값 설정
             post.save()  # 저장
             return redirect('board:post_list')
     else:
         form = PostForm()
+
     return render(request, 'board/post_form.html', {'form': form})
 
 
@@ -64,7 +66,6 @@ def post_delete(request, pk):
 def post_list(request):
     if not request.user.is_authenticated:
         return redirect('account_logout')  # 로그인 페이지로 리디렉션
-
     user = request.user
     posts = Post.objects.filter(user=user).order_by('-id')  # ✅ filter() 사용
     paginator = Paginator(posts, 5)  # 📌 한 페이지에 5개씩
@@ -72,8 +73,13 @@ def post_list(request):
     page_obj = paginator.get_page(page_number)
     
     return render(request, 'board/post_list.html', {'page_obj': page_obj})
-
-
+@login_required(login_url='/accounts/login/')
+def public_list(request):
+    posts = Post.objects.filter(visibility = True).order_by('-id')  # ✅ filter() 사용
+    paginator = Paginator(posts, 5)  # 📌 한 페이지에 5개씩
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'board/public_list.html', {'page_obj': page_obj})
 @login_required(login_url='/accounts/login/')
 def summary(request, pk):
     post = get_object_or_404(Post, pk=pk)  # 게시글 가져오기

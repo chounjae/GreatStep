@@ -3,7 +3,7 @@ from .base import *
 DEBUG = True  # 개발에서는 True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
+ACCOUNT_EMAIL_REQUIRED = False  
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
