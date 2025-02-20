@@ -98,7 +98,7 @@
       {% for post in page_obj %}
       <li class="post-item">
         <a href="{% url 'board:post_detail' post.pk %}" class="under-bar"
-          >{{ post.title }}</a
+          >{{ post.title }} / {{post.user}}님</a
         >
       </li>
       {% empty %}

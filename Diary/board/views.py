@@ -18,6 +18,10 @@ from django.contrib import messages
 @login_required(login_url='/accounts/login/')
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
+    if post.visibility == False :
+        if post.user != request.user:
+            messages.error(request, '비공개 게시글입니다.')
+            return redirect('board:post_list')
     return render(request, 'board/post_detail.html', {'post': post})
 
 # 새 게시글 작성
@@ -41,6 +45,10 @@ def post_create(request):
 @login_required(login_url='/accounts/login/')
 def post_update(request, pk):
     post = Post.objects.get(pk=pk)
+    if post.visibility == False :
+        if post.user != request.user:
+            messages.error(request, '비공개 게시글입니다.')
+            return redirect('board:post_list')
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -54,7 +62,10 @@ def post_update(request, pk):
 @login_required(login_url='/accounts/login/')
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    
+    if post.visibility == False :
+        if post.user != request.user:
+            messages.error(request, '비공개 게시글입니다.')
+            return redirect('board:post_list')    
     if request.method == 'POST':  # POST 요청일 때만 삭제 처리
         post.delete()
         return redirect('board:post_list')  # 삭제 후 게시글 목록으로 리디렉션
@@ -79,10 +90,14 @@ def public_list(request):
     paginator = Paginator(posts, 5)  # 📌 한 페이지에 5개씩
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'board/public_list.html', {'page_obj': page_obj})
+    return render(request, 'board/public_list.html', {'page_obj': page_obj, })
 @login_required(login_url='/accounts/login/')
 def summary(request, pk):
-    post = get_object_or_404(Post, pk=pk)  # 게시글 가져오기
+    post = get_object_or_404(Post, pk=pk)  # 게시글 
+    if post.visibility == False :
+        if post.user != request.user:
+            messages.error(request, '비공개 게시글입니다.')
+            return redirect('board:post_list')
     result = None  # 요약 결과 저장 변수
 
     if request.method == "POST":
