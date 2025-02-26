@@ -1,6 +1,6 @@
 # GreatStep
 
-main - 배포테스트까지 성공시 Commit 후 배포되는 브랜치
+main - 배포테스트까지 성공시 Commit 후 배포되는 브랜치 <br>
 deploy - 전반적인 테스트 확인용 브랜치
 
 <a href="https://github.com/devxb/gitanimals">
