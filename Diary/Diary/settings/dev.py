@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = False  # 개발에서는 True
+DEBUG = True  # 개발에서는 True
 
 
 ALLOWED_HOSTS = ['greatstep-production.up.railway.app', 'localhost', '127.0.0.1']
