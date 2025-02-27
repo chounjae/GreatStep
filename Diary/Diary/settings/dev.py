@@ -60,6 +60,7 @@ LOGIN_REDIRECT_URL = 'http://greatstep-production.up.railway.app/board'
 #SMTP 정의
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SOCIALACCOUNT_LOGIN_ON_GET = True
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 '''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # MySQL 사용
