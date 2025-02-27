@@ -3,7 +3,7 @@ from .base import *
 DEBUG = False  # 개발에서는 True
 
 
-ALLOWED_HOSTS = ['greatstep-production.up.railway.app', 'localhost', '127.0.0.1', os.getenv('MYSQL_HOST')]
+ALLOWED_HOSTS = ['greatstep-production.up.railway.app', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = [
     'https://greatstep-production.up.railway.app',  # 배포된 URL
 ]
@@ -60,16 +60,16 @@ LOGIN_REDIRECT_URL = 'http://greatstep-production.up.railway.app/board'
 #SMTP 정의
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SOCIALACCOUNT_LOGIN_ON_GET = True
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # MySQL 사용
         'NAME': 'djangodb',  # 사용할 데이터베이스 이름
         'USER': os.getenv("MYSQL_PASSWORD"),  # MySQL 사용자
         'PASSWORD': '1234',  # 해당 사용자의 비밀번호
-        'HOST': os.getenv("MYSQL_HOST"),  # MySQL 서버 주소 (로컬이면 localhost)
+        'HOST': os.getenv('MYSQL_HOST', 'localhost'),  # 환경 변수로 MySQL 서버 주소를 설정
         'PORT': '3306',  # MySQL 기본 포트
         'OPTIONS': {
             'charset': 'utf8mb4'
         },
     }
-}
+}'''
