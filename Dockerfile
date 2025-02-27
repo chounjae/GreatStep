@@ -8,15 +8,17 @@ WORKDIR /app
 RUN pip install --upgrade pip
 
 # 필요한 파일들 복사
-COPY requirements.txt .
+COPY requirements.txt .  
 RUN pip install -r requirements.txt
 
 # 프로젝트 코드 복사
 COPY . .
 
-# 포트 설정
+# WORKDIR을 manage.py가 있는 디렉토리로 변경
+WORKDIR /app/Diary
+
+# 포트 설정 (8000으로 맞춤)
 EXPOSE 8080
 
 # 서버 실행
-CMD ["python", "GreatStep/Diary/manage.py", "runserver", "0.0.0.0:8080"]
-
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
