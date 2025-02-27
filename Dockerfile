@@ -1,23 +1,20 @@
 # 베이스 이미지
 FROM python:3.10
 
-# 작업 디렉토리 설정
-WORKDIR /app
+# 작업 디렉토리 설정 (Django 프로젝트 루트로 변경)
+WORKDIR /app/Diary
 
 # 필수 패키지 설치
 RUN pip install --upgrade pip
 
 # 필요한 파일들 복사
-COPY requirements.txt .  
-RUN pip install -r requirements.txt
+COPY requirements.txt /app/
+RUN pip install -r /app/requirements.txt
 
 # 프로젝트 코드 복사
-COPY . .
+COPY . /app/
 
-# WORKDIR을 manage.py가 있는 디렉토리로 변경
-WORKDIR /app/Diary
-
-# 포트 설정 (8000으로 맞춤)
+# 포트 설정 (8080)
 EXPOSE 8080
 
 # 서버 실행

@@ -67,7 +67,7 @@ DATABASES = {
         'NAME': 'djangodb',  # 사용할 데이터베이스 이름
         'USER': os.getenv("MYSQL_PASSWORD"),  # MySQL 사용자
         'PASSWORD': '1234',  # 해당 사용자의 비밀번호
-        'HOST': 'localhost',  # MySQL 서버 주소 (로컬이면 localhost)
+        'HOST': os.getenv("MYSQL_HOST"),  # MySQL 서버 주소 (로컬이면 localhost)
         'PORT': '3306',  # MySQL 기본 포트
         'OPTIONS': {
             'charset': 'utf8mb4'
