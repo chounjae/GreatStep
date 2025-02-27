@@ -2,6 +2,8 @@ from .base import *
 
 DEBUG = True  # 개발에서는 True
 
+
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ACCOUNT_EMAIL_REQUIRED = False  
 INTERNAL_IPS = [
@@ -55,4 +57,16 @@ LOGIN_REDIRECT_URL = 'http://localhost:8000/board'
 #SMTP 정의
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SOCIALACCOUNT_LOGIN_ON_GET = True
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  # MySQL 사용
+        'NAME': 'djangodb',  # 사용할 데이터베이스 이름
+        'USER': 'root',  # MySQL 사용자
+        'PASSWORD': '1234',  # 해당 사용자의 비밀번호
+        'HOST': 'localhost',  # MySQL 서버 주소 (로컬이면 localhost)
+        'PORT': '3306',  # MySQL 기본 포트
+        'OPTIONS': {
+            'charset': 'utf8mb4'
+        },
+    }
+}

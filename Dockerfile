@@ -15,7 +15,8 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # 포트 설정
-EXPOSE 8000
+EXPOSE 8080
 
 # 서버 실행
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "GreatStep/Diary/manage.py", "runserver", "0.0.0.0:8080"]
+
