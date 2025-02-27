@@ -37,8 +37,8 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SOCIALACCOUNT_PROVIDERS["google"]["APP"] = {
-    "client_id": config("client_id"),
-    "secret": config("secret"),
+    "client_id": os.getenv("client_id"),
+    "secret": os.getenv("secret"),
     "key": "",
 }
 
