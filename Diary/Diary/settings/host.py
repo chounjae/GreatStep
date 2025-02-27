@@ -3,11 +3,11 @@ from .base import *
 DEBUG = True  # 개발에서는 True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
+ACCOUNT_EMAIL_REQUIRED = False  
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 ###########################
 INSTALLED_APPS += [
     'useAPI',
@@ -51,10 +51,8 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 #회원가입 후 리다이렉트 경로
 ACCOUNT_SIGNUP_REDIRECT_URL = '/accounts/login/'
 #로그인 후 리다이렉트 경로
-LOGIN_REDIRECT_URL = 'http://localhost:8000/board/'
+LOGIN_REDIRECT_URL = 'http://localhost:8000/board'
 #SMTP 정의
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
-###########################
