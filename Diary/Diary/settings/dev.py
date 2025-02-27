@@ -3,11 +3,10 @@ from .base import *
 DEBUG = False  # 개발에서는 True
 
 
-ALLOWED_HOSTS = ['greatstep-production.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['greatstep-production.up.railway.app', 'localhost', '127.0.0.1', os.getenv('MYSQL_HOST')]
 CSRF_TRUSTED_ORIGINS = [
     'https://greatstep-production.up.railway.app',  # 배포된 URL
 ]
-AUTH_USER_MODEL = 'board.User'   #user 를 어떻게 저장할건지 꼭 저장!
 
 ACCOUNT_EMAIL_REQUIRED = False  
 INTERNAL_IPS = [
