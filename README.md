@@ -1,6 +1,6 @@
 # GreatStep
 
-tmp 브랜치 - 서버 배포 
+위대한 발 걸음은 첫 걸음
 
 url - https://greatstep-production.up.railway.app/
 
